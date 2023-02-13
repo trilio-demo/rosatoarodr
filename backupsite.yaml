@@ -1,0 +1,51 @@
+---
+- name: Preparing backup strategy
+  hosts: localhost
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: create the namespace "{{ ns }}"
+      k8s:
+        kubeconfig: "{{ kubeconfig }}"
+        api_version: v1
+        kind: Namespace
+        name: "{{ ns }}"
+        state: present
+
+    - name: Copy the secret yaml file
+      copy:
+        src: files/secret.yaml
+        dest: /tmp/secret.yaml
+
+    - name: Ensure the secret is created
+      k8s:
+        kubeconfig: "{{ kubeconfig }}"
+        state: present
+        namespace: "{{ ns }}"
+        src: /tmp/secret.yaml
+
+    - name: Copy target yaml file
+      copy:
+        src: files/target.yaml
+        dest: /tmp/target.yaml
+
+    - name: Ensure target is available in "{{ ns }}"
+      k8s:
+        kubeconfig: "{{ kubeconfig }}"
+        state: present
+        namespace: "{{ ns }}"
+        src: /tmp/target.yaml
+
+    - name: Copy the backup plan yaml file
+      copy:
+        src: files/backupplan.yaml
+        dest: /tmp/backupplan.yaml
+
+    - name: Ensure the backup plan is available
+      k8s:
+        kubeconfig: "{{ kubeconfig }}"
+        state: present
+        namespace: "{{ ns }}"
+        src: /tmp/backupplan.yaml

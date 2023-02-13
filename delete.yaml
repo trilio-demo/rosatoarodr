@@ -1,0 +1,14 @@
+---
+- name: Delete testing namespace
+  gather_facts: no
+  vars_files:
+    vars.yaml
+  hosts: localhost
+  tasks:
+    - name: Ensure the testing namespace does not exist
+      k8s:
+        kubeconfig: "{{ kubeconfig }}"
+        name: "{{ ns }}"
+        api_version: v1
+        kind: Namespace
+        state: absent

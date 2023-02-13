@@ -1,0 +1,5 @@
+ns: demo-minecraft
+nsrestore: demo-minecraft-restore
+  #kubeconfig: /home/st/trilio/kubeconfigs/rosakubeconfig.yaml
+kubeconfig: /home/st/trilio/kubeconfigs/arokubeconfig.yaml
+command1: "oc adm policy add-scc-to-user anyuid -z default -n {{ ns }}"

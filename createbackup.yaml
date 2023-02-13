@@ -1,0 +1,19 @@
+---
+- name: Launch a backup
+  hosts: localhost
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Copy the backup plan yaml file
+      copy:
+        src: files/backup.yaml
+        dest: /tmp/backup.yaml
+
+    - name: Ensure the backup runs
+      k8s:
+        kubeconfig: "{{ kubeconfig }}"
+        state: present
+        namespace: "{{ ns }}"
+        src: /tmp/backup.yaml
