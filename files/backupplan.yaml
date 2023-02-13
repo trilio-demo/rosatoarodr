@@ -1,0 +1,11 @@
+apiVersion: triliovault.trilio.io/v1
+kind: BackupPlan
+metadata:
+  name: minecraft-demo-backup-plan
+spec:
+  backupConfig:
+    target:
+      apiVersion: triliovault.trilio.io/v1
+      kind: Target
+      name: aws-sa-demo4-target
+  retainHelmApps: true

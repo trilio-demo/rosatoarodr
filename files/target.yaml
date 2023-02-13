@@ -1,0 +1,14 @@
+apiVersion: triliovault.trilio.io/v1
+kind: Target
+metadata:
+  name: aws-sa-demo4-target
+spec:
+  objectStoreCredentials:
+    bucketName: sa-demo-4
+    credentialSecret:
+      apiVersion: v1
+      kind: Secret
+      name: aws-sa-secret
+  thresholdCapacity: 100Gi
+  type: ObjectStore
+  vendor: AWS

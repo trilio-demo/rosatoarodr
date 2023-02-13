@@ -1,0 +1,8 @@
+apiVersion: triliovault.trilio.io/v1
+kind: Backup
+metadata:
+  name: minecraft-backup
+spec:
+  type: Full
+  backupPlan:
+    name: minecraft-demo-backup-plan

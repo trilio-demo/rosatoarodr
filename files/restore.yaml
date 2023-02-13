@@ -1,0 +1,15 @@
+apiVersion: triliovault.trilio.io/v1
+kind: Restore
+metadata:
+  name: restore-minecraft
+  namespace: demo-minecraft-restore
+spec:
+  skipIfAlreadyExists: true
+  source:
+    location: 9dd5e67d-e55c-4c37-91e8-ee62a377bdb3/4b0ad8e0-4108-4f7d-b0d8-ee92e1f7489a
+    target:
+      apiVersion: triliovault.trilio.io/v1
+      kind: Target
+      name: aws-sa-demo4-target
+      namespace: demo-minecraft-restore
+    type: Location
